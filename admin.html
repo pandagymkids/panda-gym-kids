@@ -381,7 +381,7 @@ const API='https://script.google.com/macros/s/AKfycbw4qkxDDyylfcZ_kY2ZwW2Pl5OZ9f
 
 // ── EMAILS COM ACESSO ADMIN ─────────────────────────────────────
 // Coloque aqui o email da sua esposa e o seu
-const ADMINS=['pandagymacademiakids@gmail.com','cindguipersonal@gmail.com'];
+const ADMINS=['pandagymkids@gmail.com','seuemail@gmail.com'];
 
 const app=initializeApp(FB);
 const auth=getAuth(app);
@@ -406,7 +406,8 @@ async function get(aba,email=''){
   return fetch(u).then(r=>r.json()).catch(()=>[]);
 }
 async function post(aba,dados){
-  return fetch(API,{method:'POST',body:JSON.stringify({aba,dados}),headers:{'Content-Type':'application/json'}}).then(r=>r.json()).catch(e=>({erro:e.toString()}));
+  const params=new URLSearchParams({acao:'escrever',aba:aba,dados:encodeURIComponent(JSON.stringify(dados))});
+  return fetch(API+'?'+params).then(r=>r.json()).catch(e=>({erro:e.toString()}));
 }
 
 // ── COLUNAS DA PLANILHA ─────────────────────────────────────────
