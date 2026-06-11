@@ -381,7 +381,7 @@ const API='https://script.google.com/macros/s/AKfycbw4qkxDDyylfcZ_kY2ZwW2Pl5OZ9f
 
 // ── EMAILS COM ACESSO ADMIN ─────────────────────────────────────
 // Coloque aqui o email da sua esposa e o seu
-const ADMINS=['pandagymacademiakids@gmail.com','cindguipersonal@gmail.com'];
+const ADMINS=['pandagymkids@gmail.com','seuemail@gmail.com'];
 
 const app=initializeApp(FB);
 const auth=getAuth(app);
@@ -492,7 +492,7 @@ function renderMens(lista){
     ?lista.map(m=>{const s=m['Status']||'';const c=s.toLowerCase().includes('pago')?'b-ok':s.toLowerCase().includes('vencido')?'b-dg':'b-warn';return`<tr><td>${m['Nome aluno']||'—'}</td><td>${m['Turma']||'—'}</td><td>${m['Mês ref.']||'—'}</td><td>R$ ${parseFloat(m['Valor (R$)']||0).toFixed(2).replace('.',',')}</td><td>${m['Vencimento']||'—'}</td><td>${m['Data pagto.']||'—'}</td><td>${m['Forma pagto.']||'—'}</td><td><span class="badge ${c}">${s||'—'}</span></td><td><button class="btn-ed" onclick="marcarPago(this)">Marcar pago</button></td></tr>`;}).join('')
     :'<tr><td colspan="9" class="sem">Nenhuma mensalidade encontrada.</td></tr>';
 }
-window.filtrarMens=function(){const m=document.getElementById('fMes').value;const s=document.getElementById('fStatus').value;renderMens(dadosMens.filter(r=>(!m||(r['Mês ref.']||')===m)&&(!s||(r['Status']||'').toLowerCase().includes(s.toLowerCase()))));};
+window.filtrarMens=function(){const m=document.getElementById('fMes').value;const s=document.getElementById('fStatus').value;renderMens(dadosMens.filter(r=>(!m||(r['Mês ref.']||'')=== m)&&(!s||(r['Status']||'').toLowerCase().includes(s.toLowerCase()))));}; 
 window.marcarPago=function(btn){const td=btn.closest('tr').querySelectorAll('td');td[7].innerHTML='<span class="badge b-ok">✓ Pago</span>';toast('Marcado como pago! Atualize na planilha.');};
 window.gerarCob=function(){toast('Configure o Asaas para gerar links PIX automáticos.');};
 
